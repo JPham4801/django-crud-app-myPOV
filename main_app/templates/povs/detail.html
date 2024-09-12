@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/povs/pov-detail.css' %}" />
+{% endblock %} {% block content %}
+<section class="cat-container">
+  <div class="cat-img">
+    <img src="https://robohash.org/set_set4/bgset_bg1/RandomParams?size=170x170" alt="{{ pov.title }}" />
+  </div>
+  <div class="cat-details">
+    <h1>{{ pov.title }}</h1>
+    <p>{{ pov.description }}</p>
+
+    {% if request.user == pov.user %}
+    <div class="cat-actions">
+      <a href="{% url 'update-post' pov.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'delete-post' pov.id %}" class="btn danger">Delete</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

@@ -5,22 +5,42 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/splash.svg' %}" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <title>myPOV</title>
     {% block head %} {% endblock %}
   </head>
   <body>
     <header>
-      
-      <nav>
+      <div class='navbar'>
         <ul>
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'sign-up' %}">Sign Up</a></li>
-          <li><a href="{% url 'sign-in' %}">Sign In</a></li>
+          <li>
+            <a href="{% url 'home' %}">
+              <h3 class='logo'>myPOV</h3>
+            </a>
+          </li>
         </ul>
-      </nav>
+      </div>
+      <div class='navbar'>
+        <nav>
+          <ul>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'explore' %}">explore</a></li>
+            <li><a href="{% url 'pov-index' %}">myPOVs</a></li>
+            <li><a href="{% url 'create-post' %}">create</a></li>
+            <li>
+              <form id="logout-form" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">logout</button>
+              </form>
+            </li>
+            {% else %}
+            <li><a href="{% url 'explore' %}">explore</a></li>
+            <li><a href="{% url 'home' %}">login</a></li>
+            <li><a href="{% url 'signup' %}">register</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
     </header>
     <main>{% block content %} {% endblock %}</main>
   </body>

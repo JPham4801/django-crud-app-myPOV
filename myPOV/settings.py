@@ -136,6 +136,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+LOGIN_URL = "home"
+
+LOGIN_REDIRECT_URL = "pov-index"
+
+LOGOUT_REDIRECT_URL = "home"
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
